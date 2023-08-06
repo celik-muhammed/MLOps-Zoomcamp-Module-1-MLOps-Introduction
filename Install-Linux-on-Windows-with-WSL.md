@@ -110,13 +110,19 @@ sudo chown -R username: ~/.ssh/name-of-your-private-key-file.pem
 nano ~/.ssh/config
 ```
 ```sh 
-# Copy Configuration in local nano editor, then Save it! 
-Host mlops-zoomcamp                                         # ssh connection calling name
-    User ubuntu                                             # username AWS EC2
-    HostName <instance-public-IPv4-addr>                    # Public IP, it changes when Source EC2 is turned off.
-    IdentityFile ~/.ssh/name-of-your-private-key-file.pem   # Private SSH key file path
-    LocalForward 8888 localhost:8888                        # Connecting to a service on an internal network from the outside, static forward or set port user forward via on vscode 
-    StrictHostKeyChecking no   
+# Copy Configuration in local nano editor, then Save it!
+# ssh connection calling name
+Host mlops-zoomcamp
+    # username AWS EC2
+    User ubuntu
+    # Public IP, it changes when Source EC2 is turned off.
+    HostName <instance-public-IPv4-addr>
+    # Private SSH key file path
+    IdentityFile ~/.ssh/mlops-zoomcamp.pem
+    # Connecting to a service on an internal network from the outside, static forward
+    # or set port user forward via on vscode
+    LocalForward 8888 localhost:8888
+    StrictHostKeyChecking no
 ```
   
 #### Cloud Step 2.6: Connect Created EC2 Instance
@@ -494,11 +500,17 @@ NEW_IP=$(aws ec2 describe-instances  \
 read -r -d '' SSH_CONFIG << EOM
 
 # Updated Configuration in local .ssh/config
-Host mlops-zoomcamp                         # ssh connection calling name
-    User ubuntu                             # username AWS EC2
-    HostName $NEW_IP                        # Public IP, it changes when Source EC2 is turned off.
-    IdentityFile ~/.ssh/mlops-zoomcamp.pem  # Private SSH key file path
-    LocalForward 8888 localhost:8888        # Connecting to a service on an internal network from the outside, static f>
+# ssh connection calling name
+Host mlops-zoomcamp
+    # username AWS EC2
+    User ubuntu
+    # Public IP, it changes when Source EC2 is turned off.
+    HostName $NEW_IP
+    # Private SSH key file path
+    IdentityFile ~/.ssh/mlops-zoomcamp.pem
+    # Connecting to a service on an internal network from the outside, static forward
+    # or set port user forward via on vscode
+    LocalForward 8888 localhost:8888
     StrictHostKeyChecking no
 EOM
 
